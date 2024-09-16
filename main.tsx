@@ -3,6 +3,7 @@ import FlashCard from "./src/components/FlashCard";
 import { CardInterface } from "./src/components/FlashCard";
 import CardButton from "./src/components/CardButton";
 import cardList from './src/config/cards.json'
+import { Text } from "react-native";
 
 const Card = ()=>{
     const [getCard,setCard] = useState<CardInterface[]>(cardList)
@@ -21,6 +22,7 @@ const Card = ()=>{
     }
     return (
     <>
+        <Text>{getCardIndex + 1}/{getCard.length}</Text>
         <FlashCard ques={getCard[getCardIndex].ques} ans={getCard[getCardIndex].ans}/>
         <CardButton 
             name="Next Page" 
