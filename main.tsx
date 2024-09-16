@@ -74,7 +74,7 @@ const Card = ()=>{
             if(autoplay.status === false){
                 setAutop(auto=>{
                     //setInterval returns Timeout instead of number.... WHY
-                    auto.id = (setInterval(()=>nextCard(InputType.System),500) as unknown) as number
+                    auto.id = (setInterval(()=>nextCard(InputType.System),5000) as unknown) as number
                     auto.status = true
                     return auto
                 })
