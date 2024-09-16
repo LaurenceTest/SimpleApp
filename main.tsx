@@ -5,16 +5,30 @@ import CardButton from "./src/components/CardButton";
 import cardList from './src/config/cards.json'
 import { Text } from "react-native";
 
+type AutoPlayInterface = {
+    id: number,
+    status: boolean
+}
+
+enum InputType {
+    System,
+    User
+}
+
 const Card = ()=>{
     const [getCard,setCard] = useState<CardInterface[]>(cardList)
     const [getCardIndex,setCardIndex] = useState<number>(0)
     const [cardKey, refresh] = useState<number>(0)
-    const nextCard = ()=>{
+    const [autoplay,setAutop] = useState<AutoPlayInterface>({id:0,status:false})
+    const nextCard = (inputType:InputType = InputType.User)=>{
+        if(inputType === InputType.User || getCardIndex == getCard.length -1)
+            stopAutoPlay()
         setCardIndex(curr=>{
             return curr < getCard.length - 1 ? ++curr : curr
         })
     }
     const prevCard = ()=>{
+        stopAutoPlay()
         setCardIndex(curr=>{
             return curr > 0 ? --curr : curr;
         })
@@ -30,6 +44,30 @@ const Card = ()=>{
         setCardIndex(0)
         refresh(key=>++key)
     }
+    const stopAutoPlay = ()=>{
+        if(autoplay.status === true){
+            setAutop(auto=>{
+                console.log(`Stoppping interval ${auto.id}`)
+                auto.status = false
+                return auto
+            })
+            clearInterval(autoplay.id)
+        }
+    }
+    const startAutoPlay = ()=>{
+        if(autoplay.status === false){
+            setAutop(auto=>{
+                //setInterval returns Timeout instead of number.... WHY
+                auto.id = (setInterval(()=>nextCard(InputType.System),500) as unknown) as number
+                console.log(`Started interval ${auto.id}`)
+                auto.status = true
+                return auto
+            })
+        }
+    }
+    const toggleAutoPlay = ()=>{
+        autoplay.status ? stopAutoPlay() : startAutoPlay()
+    }
     return (
     <>
         <Text>{getCardIndex + 1}/{getCard.length}</Text>
@@ -43,6 +81,11 @@ const Card = ()=>{
             name="Shuffle" 
             image={require("./src/assets/shuffle_24dp.png")} 
             onPress={()=>shuffleCards()}
+        />
+        <CardButton 
+            name="Autoplay"
+            image={require("./src/assets/autoplay_24dp.png")} 
+            onPress={()=>toggleAutoPlay()}
         />
         <CardButton 
             name="Previous Page" 
