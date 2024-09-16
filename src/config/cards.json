@@ -1,0 +1,42 @@
+[
+    {
+      "ans": "Ability Score",
+      "ques": "A numerical representation of a character's core attributes (e.g., Strength, Dexterity) that affect gameplay."
+    },
+    {
+      "ans": "Armor Class (AC)",
+      "ques": "A number representing how difficult it is to hit a character in combat."
+    },
+    {
+      "ans": "Saving Throw",
+      "ques": "A roll made to avoid or mitigate harmful effects, like resisting a spell or avoiding a trap."
+    },
+    {
+      "ans": "Hit Points (HP)",
+      "ques": "A measure of a character’s health, reduced when they take damage."
+    },
+    {
+      "ans": "Dungeon Master (DM)",
+      "ques": "The game leader who controls the setting, story, and non-player characters."
+    },
+    {
+      "ans": "Initiative",
+      "ques": "A roll deansining the order in which characters act during combat."
+    },
+    {
+      "ans": "Cantrip",
+      "ques": "A minor spell that can be cast an unlimited number of times without expending spell slots."
+    },
+    {
+      "ans": "Spell Slot",
+      "ques": "A limited resource used by spellcasters to cast leveled spells."
+    },
+    {
+      "ans": "Long Rest",
+      "ques": "A period of downtime (usually 8 hours) that allows characters to recover hit points and resources."
+    },
+    {
+      "ans": "Feat",
+      "ques": "A special ability or trait that enhances a character’s capabilities beyond class features."
+    }
+  ]
