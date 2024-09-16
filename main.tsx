@@ -3,7 +3,7 @@ import FlashCard from "./src/components/FlashCard";
 import { CardInterface } from "./src/components/FlashCard";
 import CardButton from "./src/components/CardButton";
 import cardList from './src/config/cards.json'
-import { Text } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
 type AutoPlayInterface = {
     id: number,
@@ -87,31 +87,65 @@ const Card = ()=>{
         autoplay.status ? stopAutoPlay() : startAutoPlay()
     }
     return (
-    <>
-        <Text>{getCardIndex + 1}/{getCard.length}</Text>
+    <View style={styles.body}>
+        <View style={styles.cardCountBG}>
+            <Text style={styles.cardCount}>{getCardIndex + 1}/{getCard.length}</Text>
+        </View>
         <FlashCard key={cardKey} ques={getCard[getCardIndex].ques} ans={getCard[getCardIndex].ans}/>
-        <CardButton 
-            name="Next Page" 
-            image={require("./src/assets/arrow_circle_right_24dp.png")} 
-            onPress={()=>nextCard()}
-        />
-        <CardButton 
-            name="Shuffle" 
-            image={require("./src/assets/shuffle_24dp.png")} 
-            onPress={()=>shuffleCards()}
-        />
-        <CardButton 
-            name="Autoplay"
-            image={require("./src/assets/autoplay_24dp.png")} 
-            onPress={()=>toggleAutoPlay()}
-        />
-        <CardButton 
-            name="Previous Page" 
-            image={require("./src/assets/arrow_circle_left_24dp.png")} 
-            onPress={()=>prevCard()}
-        />
-    </>
+        <View style={styles.buttonRow}>
+            <CardButton 
+                name="Previous Page" 
+                image={require("./src/assets/arrow_circle_left_24dp.png")} 
+                onPress={()=>prevCard()}
+            />
+            <CardButton 
+                name="Shuffle" 
+                image={require("./src/assets/shuffle_24dp.png")} 
+                onPress={()=>shuffleCards()}
+            />
+            <CardButton 
+                name="Autoplay"
+                image={require("./src/assets/autoplay_24dp.png")} 
+                onPress={()=>toggleAutoPlay()}
+            />
+            <CardButton 
+                name="Next Page" 
+                image={require("./src/assets/arrow_circle_right_24dp.png")} 
+                onPress={()=>nextCard()}
+            />
+        </View>
+    </View>
     )
 }
+
+const styles = StyleSheet.create({
+    cardCount:{
+        textAlign: "center",
+        fontSize: 30,
+        color: "#FFFFFF",
+    },
+    cardCountBG:{
+        marginTop: 10,
+        paddingVertical: 20,
+        alignContent: "center",
+        justifyContent: "center",
+        backgroundColor: "#5e374a"
+    },
+    buttonRow:{
+        flexDirection: "row",
+        alignContent: "center",
+        justifyContent: "center",
+        backgroundColor: "#5e374a",
+        paddingVertical: 40,
+        marginBottom: 10
+    },
+    body:{
+        flexDirection:"column",
+        flex: 1,
+        justifyContent: "space-between",
+        alignContent: "center",
+        backgroundColor: "#2d0043"
+    }
+})
 
 export default Card

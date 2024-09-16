@@ -1,5 +1,5 @@
 import React from "react";
-import {Image, ImageProps, TouchableOpacity } from "react-native";
+import {Image, ImageProps, StyleSheet, TouchableOpacity } from "react-native";
 
 export type CardButtonInterface = {
     name: string,
@@ -11,10 +11,16 @@ const CardButton: React.FC<CardButtonInterface> = (props)=>{
     return(
         <>
             <TouchableOpacity onPress={()=>props.onPress()}>
-                <Image source={props.image}/>
+                <Image source={props.image} style={styles.cardButton}/>
             </TouchableOpacity>
         </>
     )
 }
+
+const styles = StyleSheet.create({
+    cardButton:{
+        tintColor: "#eee1b3"
+    }
+})
 
 export default CardButton
