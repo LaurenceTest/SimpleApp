@@ -1,5 +1,5 @@
-import React, { PropsWithChildren } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { useState } from "react";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 export type CardInterface = {
     ques: string,
@@ -7,10 +7,11 @@ export type CardInterface = {
 }
 
 const FlashCard: React.FC<CardInterface> = ({ques,ans})=>{
+    const [side,setSide] = useState<boolean>(false)
     return(
-        <View style={styles.card}>
-            <Text>{ques} = {ans}</Text>
-        </View>
+        <TouchableOpacity onPress={()=>setSide(side=>!side)}>
+            <Text>{side ? ques: ans}</Text>
+        </TouchableOpacity>
     )
 }
 
