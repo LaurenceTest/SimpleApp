@@ -10,13 +10,11 @@ const Card = ()=>{
     const [getCardIndex,setCardIndex] = useState<number>(0)
     const [cardKey, refresh] = useState<number>(0)
     const nextCard = ()=>{
-        console.log(getCard.length, getCardIndex)
         setCardIndex(curr=>{
             return curr < getCard.length - 1 ? ++curr : curr
         })
     }
     const prevCard = ()=>{
-        console.log(getCard.length, getCardIndex)
         setCardIndex(curr=>{
             return curr > 0 ? --curr : curr;
         })
