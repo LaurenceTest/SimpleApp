@@ -21,48 +21,68 @@ const Card = ()=>{
     const [cardKey, refresh] = useState<number>(0)
     const [autoplay,setAutop] = useState<AutoPlayInterface>({id:0,status:false})
     const nextCard = (inputType:InputType = InputType.User)=>{
-        if(inputType === InputType.User || getCardIndex == getCard.length -1)
-            stopAutoPlay()
-        setCardIndex(curr=>{
-            return curr < getCard.length - 1 ? ++curr : curr
-        })
+        try {
+            if(inputType === InputType.User || getCardIndex == getCard.length -1)
+                stopAutoPlay()
+            setCardIndex(curr=>{
+                return curr < getCard.length - 1 ? ++curr : curr
+            })
+        } catch (error) {
+            console.error(error);
+        }
     }
     const prevCard = ()=>{
-        stopAutoPlay()
-        setCardIndex(curr=>{
-            return curr > 0 ? --curr : curr;
-        })
+        try {
+            stopAutoPlay()
+            setCardIndex(curr=>{
+                return curr > 0 ? --curr : curr;
+            })
+        } catch (error) {
+            console.error(error);
+        }
     }
     const shuffleCards = () => { 
-        setCard((list:CardInterface[])=>{
-            for (let i = list.length - 1; i > 0; i--) { 
-              const j = Math.floor(Math.random() * (i + 1)); 
-              [list[i], list[j]] = [list[j], list[i]]; 
-            } 
-            return list;
-        })
-        setCardIndex(0)
-        refresh(key=>++key)
+        try {
+            setCard((list:CardInterface[])=>{
+                for (let i = list.length - 1; i > 0; i--) { 
+                  const j = Math.floor(Math.random() * (i + 1)); 
+                  [list[i], list[j]] = [list[j], list[i]]; 
+                } 
+                return list;
+            })
+            setCardIndex(0)
+            refresh(key=>++key)
+        } catch (error) {
+            console.error(error);
+        }
     }
     const stopAutoPlay = ()=>{
-        if(autoplay.status === true){
-            setAutop(auto=>{
-                console.log(`Stoppping interval ${auto.id}`)
-                auto.status = false
-                return auto
-            })
-            clearInterval(autoplay.id)
+        try {
+            if(autoplay.status === true){
+                setAutop(auto=>{
+                    console.log(`Stoppping interval ${auto.id}`)
+                    auto.status = false
+                    return auto
+                })
+                clearInterval(autoplay.id)
+            }
+        } catch (error) {
+            console.error(error);
         }
     }
     const startAutoPlay = ()=>{
-        if(autoplay.status === false){
-            setAutop(auto=>{
-                //setInterval returns Timeout instead of number.... WHY
-                auto.id = (setInterval(()=>nextCard(InputType.System),500) as unknown) as number
-                console.log(`Started interval ${auto.id}`)
-                auto.status = true
-                return auto
-            })
+        try {
+            if(autoplay.status === false){
+                setAutop(auto=>{
+                    //setInterval returns Timeout instead of number.... WHY
+                    auto.id = (setInterval(()=>nextCard(InputType.System),500) as unknown) as number
+                    console.log(`Started interval ${auto.id}`)
+                    auto.status = true
+                    return auto
+                })
+            }            
+        } catch (error) {
+            console.error(error);
         }
     }
     const toggleAutoPlay = ()=>{
